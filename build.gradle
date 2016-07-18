@@ -3,11 +3,16 @@ version '0.0'
 
 apply plugin: 'java'
 
+//noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
     jcenter()
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
 }
 
 dependencies {
