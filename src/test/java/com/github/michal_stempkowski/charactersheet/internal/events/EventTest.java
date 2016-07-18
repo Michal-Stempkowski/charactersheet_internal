@@ -41,4 +41,10 @@ public class EventTest {
         expectedException.expect(ClassCastException.class);
         InitializeEvent ev = Event.tryCast(new ShutdownPerformedEvent());
     }
+
+    @Test
+    public void eventTypeShouldBeAPlaceholderMethod() {
+        expectedException.expect(UnsupportedOperationException.class);
+        Event.eventType();
+    }
 }
