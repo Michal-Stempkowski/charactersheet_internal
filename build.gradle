@@ -1,4 +1,4 @@
-group 'com.github.michal_stempkowski'
+group 'com.github.michal_stempkowski.charactersheet.internal'
 version '0.0'
 
 apply plugin: 'java'
