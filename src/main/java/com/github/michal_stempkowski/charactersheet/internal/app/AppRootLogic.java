@@ -29,22 +29,22 @@ public class AppRootLogic {
                 .getPackageInitializers().stream()
                 .flatMap(x -> x.init().stream())
                 .collect(Collectors.toList());
-        return domains.stream().map(Domain::getStatus).noneMatch(ErrorMonad::hasErrorOccurred);
+        return AppRootLogic.domains.stream().map(Domain::getStatus).noneMatch(ErrorMonad::hasErrorOccurred);
     }
 
     public static EventDispatcher getEventDispatcher() {
-        return topLogicFactory.getEventDispatcher();
+        return AppRootLogic.topLogicFactory.getEventDispatcher();
     }
 
     public static Logger createLogger(Target targetId, DomainId domainId, String name) {
-        return topLogicFactory.createLogger(targetId, domainId, name);
+        return AppRootLogic.topLogicFactory.createLogger(targetId, domainId, name);
     }
 
     public static void start() {
-        topLogicFactory.start();
+        AppRootLogic.topLogicFactory.start();
     }
 
     public static TaskScheduler getTaskScheduler() {
-        return topLogicFactory.getTaskScheduler();
+        return AppRootLogic.topLogicFactory.getTaskScheduler();
     }
 }

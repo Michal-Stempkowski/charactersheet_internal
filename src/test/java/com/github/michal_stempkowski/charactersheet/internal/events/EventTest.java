@@ -39,7 +39,7 @@ public class EventTest {
     @Test
     public void shouldWarnAboutInvalidEventCast() {
         expectedException.expect(ClassCastException.class);
-        InitializeEvent ev = Event.tryCast(new ShutdownPerformedEvent());
+        @SuppressWarnings("unused") InitializeEvent ev = Event.tryCast(new ShutdownPerformedEvent());
     }
 
     @Test

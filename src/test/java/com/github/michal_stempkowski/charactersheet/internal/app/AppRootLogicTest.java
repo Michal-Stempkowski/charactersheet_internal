@@ -1,12 +1,11 @@
 package com.github.michal_stempkowski.charactersheet.internal.app;
 
-import com.github.michal_stempkowski.charactersheet.internal.events.EventDispatcher;
-import com.github.michal_stempkowski.charactersheet.internal.parallelism.TaskScheduler;
-import org.junit.Before;
-import org.junit.Test;
 import com.github.michal_stempkowski.charactersheet.internal.DomainId;
 import com.github.michal_stempkowski.charactersheet.internal.Target;
+import com.github.michal_stempkowski.charactersheet.internal.events.EventDispatcher;
 import com.github.michal_stempkowski.charactersheet.internal.utils.ErrorMonad;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,22 +25,20 @@ public class AppRootLogicTest {
     private AppRootLogic sut;
     private EventDispatcher eventDispatcherMock;
     private Logger loggerMock;
-    private TaskScheduler taskSchedulerMock;
 
     @Before
     public void setUp() {
         topLogicFactoryMock = mock(TopLogicFactory.class);
-        setup_package_initializer_mocks();
-        setup_domain_mocks();
+        setupPackageInitializerMocks();
+        setupDomainMocks();
 
         eventDispatcherMock = mock(EventDispatcher.class);
         loggerMock = mock(Logger.class);
-        taskSchedulerMock = mock(TaskScheduler.class);
 
         sut = new AppRootLogic(topLogicFactoryMock);
     }
 
-    private void setup_domain_mocks() {
+    private void setupDomainMocks() {
         domainMocks = new LinkedList<>();
         domainMocks.add(mock(Domain.class));
 
@@ -51,7 +48,7 @@ public class AppRootLogicTest {
         when(domainFailedInitialization.getStatus()).thenReturn(new ErrorMonad(new Exception()));
     }
 
-    private void setup_package_initializer_mocks() {
+    private void setupPackageInitializerMocks() {
         packageInitializerMocks = new LinkedList<>();
         packageInitializerMocks.add(mock(PackageInitializer.class));
     }
@@ -69,14 +66,12 @@ public class AppRootLogicTest {
         boolean initializationSucceded = AppRootLogic.init();
         // Then:
         assertThat(initializationSucceded, is(true));
-//        assertThat(domainsCreated, is(empty()));
     }
 
     @Test
     public void onValidPackageInitializationInitShouldReturnTrue() {
         // Given:
         wirePackageInitializersAndDomains();
-//        AppRootLogic handle = new AppRootLogic(topLogicFactoryMock);
         // When:
         boolean initializationSucceded = AppRootLogic.init();
         // Then:

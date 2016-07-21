@@ -6,7 +6,7 @@ import java.rmi.server.UID;
 import java.util.function.BiFunction;
 
 /**
- * Interface designed for long running tasks. Long running tasks are expected to be
+ * Class designed for creating long running tasks. Long running tasks are expected to be
  * divided into arbitrarily short-running methods after which whole state of task
  * is to be evaluated. Evaluation may cause task removal, changing next method to be run
  * (for example internal state of task has been changed, and now it requires to use
