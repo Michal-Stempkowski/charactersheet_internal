@@ -103,12 +103,12 @@ public class AppRootLogicTest {
     @Test
     public void shouldBeAbleToCreateLogger() {
         // Given:
-        when(topLogicFactoryMock.createLogger(Target.INTERNAL, DomainId.LOGGING, getClass().getName()))
+        when(topLogicFactoryMock.createLogger(Target.INTERNAL, DomainId.LOGGING.id, getClass().getName()))
                 .thenReturn(loggerMock);
         // When/Then:
-        assertThat(AppRootLogic.createLogger(Target.INTERNAL, DomainId.LOGGING, getClass().getName()),
+        assertThat(AppRootLogic.createLogger(Target.INTERNAL, DomainId.LOGGING.id, getClass().getName()),
                 is(equalTo(loggerMock)));
-        verify(topLogicFactoryMock).createLogger(Target.INTERNAL, DomainId.LOGGING, getClass().getName());
+        verify(topLogicFactoryMock).createLogger(Target.INTERNAL, DomainId.LOGGING.id, getClass().getName());
     }
 
     @Test

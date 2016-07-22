@@ -25,7 +25,7 @@ public class LoggingDomainTest {
         Logger loggerMock = mock(Logger.class);
         @SuppressWarnings("unused") AppRootLogic root = new AppRootLogic(topLogicFactoryMock);
         when(topLogicFactoryMock.createLogger(
-                any(Target.class), any(DomainId.class), any(String.class))).thenReturn(loggerMock);
+                any(Target.class), any(Integer.class), any(String.class))).thenReturn(loggerMock);
         uut = new LoggingDomain();
     }
 
@@ -34,7 +34,7 @@ public class LoggingDomainTest {
         // When:
         uut.setup();
         // Then:
-        verify(topLogicFactoryMock).createLogger(Target.INTERNAL, DomainId.LOGGING, uut.getClass().getName());
+        verify(topLogicFactoryMock).createLogger(Target.INTERNAL, DomainId.LOGGING.id, uut.getClass().getName());
         assertThat(uut.getStatus().hasErrorOccurred(), is(false));
     }
 }

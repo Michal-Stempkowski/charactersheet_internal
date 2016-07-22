@@ -23,7 +23,7 @@ public class LoggingDomain implements Domain {
 
     @Override
     public void setup() {
-        logger = AppRootLogic.createLogger(Target.INTERNAL, DomainId.LOGGING, getClass().getName());
+        logger = AppRootLogic.createLogger(Target.INTERNAL, DomainId.LOGGING.id, getClass().getName());
         logger.info("Logging system has started successfully!");
     }
 }
