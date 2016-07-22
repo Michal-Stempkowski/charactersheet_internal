@@ -3,6 +3,7 @@ package com.github.michal_stempkowski.charactersheet.internal.app;
 import com.github.michal_stempkowski.charactersheet.internal.Target;
 import com.github.michal_stempkowski.charactersheet.internal.events.EventDispatcher;
 import com.github.michal_stempkowski.charactersheet.internal.parallelism.TaskScheduler;
+import com.github.michal_stempkowski.charactersheet.internal.DomainId;
 import com.github.michal_stempkowski.charactersheet.internal.utils.ErrorMonad;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class AppRootLogic {
         return AppRootLogic.topLogicFactory.getEventDispatcher();
     }
 
-    public static Logger createLogger(Target targetId, int domainId, String name) {
+    public static Logger createLogger(Target targetId, DomainId domainId, String name) {
         return AppRootLogic.topLogicFactory.createLogger(targetId, domainId, name);
     }
 

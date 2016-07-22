@@ -3,6 +3,7 @@ package com.github.michal_stempkowski.charactersheet.internal.app;
 import com.github.michal_stempkowski.charactersheet.internal.Target;
 import com.github.michal_stempkowski.charactersheet.internal.events.EventDispatcher;
 import com.github.michal_stempkowski.charactersheet.internal.parallelism.TaskScheduler;
+import com.github.michal_stempkowski.charactersheet.internal.DomainId;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -15,7 +16,7 @@ public interface TopLogicFactory {
 
     EventDispatcher getEventDispatcher();
 
-    Logger createLogger(Target targetId, int domainId, String name);
+    Logger createLogger(Target targetId, DomainId domainId, String name);
 
     void start();
 

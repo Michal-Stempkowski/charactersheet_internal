@@ -1,7 +1,7 @@
 package com.github.michal_stempkowski.charactersheet.internal.logging;
 
 import com.github.michal_stempkowski.charactersheet.internal.app.AppRootLogic;
-import com.github.michal_stempkowski.charactersheet.internal.DomainId;
+import com.github.michal_stempkowski.charactersheet.internal.InternalDomainId;
 import com.github.michal_stempkowski.charactersheet.internal.Target;
 import com.github.michal_stempkowski.charactersheet.internal.app.Domain;
 import com.github.michal_stempkowski.charactersheet.internal.utils.ErrorMonad;
@@ -23,7 +23,7 @@ public class LoggingDomain implements Domain {
 
     @Override
     public void setup() {
-        logger = AppRootLogic.createLogger(Target.INTERNAL, DomainId.LOGGING.id, getClass().getName());
+        logger = AppRootLogic.createLogger(Target.INTERNAL, InternalDomainId.LOGGING, getClass().getName());
         logger.info("Logging system has started successfully!");
     }
 }

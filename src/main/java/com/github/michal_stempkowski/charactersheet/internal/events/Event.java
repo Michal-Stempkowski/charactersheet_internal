@@ -1,5 +1,7 @@
 package com.github.michal_stempkowski.charactersheet.internal.events;
 
+import com.github.michal_stempkowski.charactersheet.internal.DomainId;
+import com.github.michal_stempkowski.charactersheet.internal.EventId;
 import com.github.michal_stempkowski.charactersheet.internal.Target;
 
 import java.util.ArrayList;
@@ -18,16 +20,16 @@ public class Event {
         this.args =new ArrayList<>(Arrays.asList(args));
     }
 
-    public static int calculateEventType(int targetId, int domainId, int eventId) {
-        if (targetId < 0) {
-            throw new EventTypeCalculationError(targetId);
-        } else if ( domainId < 0 || domainId >= Target.Consts.DOMAINS_ALLOWED) {
-            throw new EventTypeCalculationError(domainId);
-        } else if ((eventId < 0 || eventId >= Target.Consts.EVENTS_IN_DOMAIN_ALLOWED)) {
-            throw new EventTypeCalculationError((eventId));
+    public static int calculateEventType(Target target, DomainId domain, EventId event) {
+        if (target.id() < 0) {
+            throw new EventTypeCalculationError(target.id());
+        } else if ( domain.id() < 0 || domain.id() >= Target.Consts.DOMAINS_ALLOWED) {
+            throw new EventTypeCalculationError(domain.id());
+        } else if ((event.id() < 0 || event.id() >= Target.Consts.EVENTS_IN_DOMAIN_ALLOWED)) {
+            throw new EventTypeCalculationError((event.id()));
         } else {
-            return (targetId * Target.Consts.DOMAINS_ALLOWED + domainId) *
-                    Target.Consts.EVENTS_IN_DOMAIN_ALLOWED + eventId;
+            return (target.id() * Target.Consts.DOMAINS_ALLOWED + domain.id()) *
+                    Target.Consts.EVENTS_IN_DOMAIN_ALLOWED + event.id();
         }
     }
 

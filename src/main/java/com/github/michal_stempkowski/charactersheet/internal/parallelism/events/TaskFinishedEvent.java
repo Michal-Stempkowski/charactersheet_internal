@@ -1,6 +1,6 @@
 package com.github.michal_stempkowski.charactersheet.internal.parallelism.events;
 
-import com.github.michal_stempkowski.charactersheet.internal.DomainId;
+import com.github.michal_stempkowski.charactersheet.internal.InternalDomainId;
 import com.github.michal_stempkowski.charactersheet.internal.Target;
 import com.github.michal_stempkowski.charactersheet.internal.events.Event;
 import com.github.michal_stempkowski.charactersheet.internal.parallelism.CyclingTask;
@@ -15,7 +15,7 @@ public class TaskFinishedEvent extends Event {
     }
 
     public static int eventType() {
-        return calculateEventType(Target.INTERNAL.id, DomainId.PARALLELISM.id, ParallelismEventId.TASK_FINISHED.id);
+        return calculateEventType(Target.INTERNAL, InternalDomainId.PARALLELISM, ParallelismEventId.TASK_FINISHED);
     }
 
     public CyclingTask getTask() {

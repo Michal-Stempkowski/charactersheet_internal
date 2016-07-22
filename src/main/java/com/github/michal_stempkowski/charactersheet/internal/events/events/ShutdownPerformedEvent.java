@@ -1,6 +1,6 @@
 package com.github.michal_stempkowski.charactersheet.internal.events.events;
 
-import com.github.michal_stempkowski.charactersheet.internal.DomainId;
+import com.github.michal_stempkowski.charactersheet.internal.InternalDomainId;
 import com.github.michal_stempkowski.charactersheet.internal.Target;
 import com.github.michal_stempkowski.charactersheet.internal.events.Event;
 import com.github.michal_stempkowski.charactersheet.internal.events.EventEventId;
@@ -14,6 +14,6 @@ public class ShutdownPerformedEvent extends Event{
     }
 
     public static int eventType() {
-        return calculateEventType(Target.INTERNAL.id, DomainId.EVENT.id, EventEventId.SHUTDOWN_PERFORMED_EVENT.id);
+        return calculateEventType(Target.INTERNAL, InternalDomainId.EVENT, EventEventId.SHUTDOWN_PERFORMED_EVENT);
     }
 }

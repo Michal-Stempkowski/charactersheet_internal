@@ -1,10 +1,11 @@
 package com.github.michal_stempkowski.charactersheet.internal.logging;
 
-import com.github.michal_stempkowski.charactersheet.internal.DomainId;
+import com.github.michal_stempkowski.charactersheet.internal.InternalDomainId;
 import com.github.michal_stempkowski.charactersheet.internal.Target;
 import com.github.michal_stempkowski.charactersheet.internal.app.AppRootLogic;
 import com.github.michal_stempkowski.charactersheet.internal.app.Domain;
 import com.github.michal_stempkowski.charactersheet.internal.app.TopLogicFactory;
+import com.github.michal_stempkowski.charactersheet.internal.DomainId;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,7 +26,7 @@ public class LoggingDomainTest {
         Logger loggerMock = mock(Logger.class);
         @SuppressWarnings("unused") AppRootLogic root = new AppRootLogic(topLogicFactoryMock);
         when(topLogicFactoryMock.createLogger(
-                any(Target.class), any(Integer.class), any(String.class))).thenReturn(loggerMock);
+                any(Target.class), any(DomainId.class), any(String.class))).thenReturn(loggerMock);
         uut = new LoggingDomain();
     }
 
@@ -34,7 +35,7 @@ public class LoggingDomainTest {
         // When:
         uut.setup();
         // Then:
-        verify(topLogicFactoryMock).createLogger(Target.INTERNAL, DomainId.LOGGING.id, uut.getClass().getName());
+        verify(topLogicFactoryMock).createLogger(Target.INTERNAL, InternalDomainId.LOGGING, uut.getClass().getName());
         assertThat(uut.getStatus().hasErrorOccurred(), is(false));
     }
 }

@@ -1,8 +1,12 @@
 package com.github.michal_stempkowski.charactersheet.internal.events;
 
+import com.github.michal_stempkowski.charactersheet.internal.DomainId;
+import com.github.michal_stempkowski.charactersheet.internal.EventId;
+import com.github.michal_stempkowski.charactersheet.internal.InternalDomainId;
 import com.github.michal_stempkowski.charactersheet.internal.Target;
 import com.github.michal_stempkowski.charactersheet.internal.events.events.InitializeEvent;
 import com.github.michal_stempkowski.charactersheet.internal.events.events.ShutdownPerformedEvent;
+import com.github.michal_stempkowski.charactersheet.internal.parallelism.ParallelismEventId;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -12,22 +16,48 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.fail;
 
+class DummyHolder implements DomainId, EventId {
+    private final int value;
+
+    public DummyHolder(int val) {
+        value = val;
+    }
+
+    @Override
+    public int id() {
+        return value;
+    }
+
+    @Override
+    public String name() {
+        return null;
+    }
+}
+
 public class EventTest {
     @Rule
     public final ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void calculateEventTypeShouldThrowOnInvalidNumbers() {
-        assertCalculationFailed(-1, 0, 0, -1);
-        assertCalculationFailed(0, -1, 0, -1);
-        assertCalculationFailed(0, Target.Consts.DOMAINS_ALLOWED, 0, Target.Consts.DOMAINS_ALLOWED);
-        assertCalculationFailed(0, 0, -1, -1);
-        assertCalculationFailed(0, 0, Target.Consts.EVENTS_IN_DOMAIN_ALLOWED, Target.Consts.EVENTS_IN_DOMAIN_ALLOWED);
+        assertCalculationFailed(Target.UNDEFINED, new DummyHolder(0), new DummyHolder(0), -1);
+        assertCalculationFailed(Target.INTERNAL, new DummyHolder(-1), new DummyHolder(0), -1);
+        assertCalculationFailed(
+                Target.INTERNAL, new DummyHolder(Target.Consts.DOMAINS_ALLOWED), new DummyHolder(0),
+                Target.Consts.DOMAINS_ALLOWED);
+        assertCalculationFailed(
+                Target.INTERNAL, new DummyHolder(0), new DummyHolder(-1), -1);
+        assertCalculationFailed(
+                Target.INTERNAL, new DummyHolder(0), new DummyHolder(Target.Consts.EVENTS_IN_DOMAIN_ALLOWED),
+                Target.Consts.EVENTS_IN_DOMAIN_ALLOWED);
 
-        assertThat(Event.calculateEventType(1, 1, 15), is(equalTo(1_049_615)));
+        assertThat(
+                Event.calculateEventType(
+                        Target.INTERNAL, InternalDomainId.PARALLELISM, ParallelismEventId.TASK_FINISHED),
+                is(equalTo(2048)));
     }
 
-    private void assertCalculationFailed(int targetId, int domainId, int eventId, int expectedErrorValue) {
+    private void assertCalculationFailed(Target targetId, DomainId domainId, EventId eventId, int expectedErrorValue) {
         try {
             Event.calculateEventType(targetId, domainId, eventId);
             fail();

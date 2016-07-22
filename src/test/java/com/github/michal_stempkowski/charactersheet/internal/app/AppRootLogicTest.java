@@ -1,6 +1,6 @@
 package com.github.michal_stempkowski.charactersheet.internal.app;
 
-import com.github.michal_stempkowski.charactersheet.internal.DomainId;
+import com.github.michal_stempkowski.charactersheet.internal.InternalDomainId;
 import com.github.michal_stempkowski.charactersheet.internal.Target;
 import com.github.michal_stempkowski.charactersheet.internal.events.EventDispatcher;
 import com.github.michal_stempkowski.charactersheet.internal.utils.ErrorMonad;
@@ -103,12 +103,12 @@ public class AppRootLogicTest {
     @Test
     public void shouldBeAbleToCreateLogger() {
         // Given:
-        when(topLogicFactoryMock.createLogger(Target.INTERNAL, DomainId.LOGGING.id, getClass().getName()))
+        when(topLogicFactoryMock.createLogger(Target.INTERNAL, InternalDomainId.LOGGING, getClass().getName()))
                 .thenReturn(loggerMock);
         // When/Then:
-        assertThat(AppRootLogic.createLogger(Target.INTERNAL, DomainId.LOGGING.id, getClass().getName()),
+        assertThat(AppRootLogic.createLogger(Target.INTERNAL, InternalDomainId.LOGGING, getClass().getName()),
                 is(equalTo(loggerMock)));
-        verify(topLogicFactoryMock).createLogger(Target.INTERNAL, DomainId.LOGGING.id, getClass().getName());
+        verify(topLogicFactoryMock).createLogger(Target.INTERNAL, InternalDomainId.LOGGING, getClass().getName());
     }
 
     @Test

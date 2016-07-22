@@ -1,14 +1,21 @@
 package com.github.michal_stempkowski.charactersheet.internal.parallelism;
 
+import com.github.michal_stempkowski.charactersheet.internal.EventId;
+
 /**
  * Enum used to differentiate between different event ids in 'parallelism' domain
  */
-public enum ParallelismEventId {
+public enum ParallelismEventId implements EventId{
     TASK_FINISHED(0);
 
-    public final int id;
+    private final int id;
 
     ParallelismEventId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public int id() {
+        return id;
     }
 }
