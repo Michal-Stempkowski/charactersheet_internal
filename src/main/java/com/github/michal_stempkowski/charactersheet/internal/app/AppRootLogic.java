@@ -6,6 +6,7 @@ import com.github.michal_stempkowski.charactersheet.internal.DomainId;
 import com.github.michal_stempkowski.charactersheet.internal.Target;
 import com.github.michal_stempkowski.charactersheet.internal.utils.ErrorMonad;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -17,8 +18,8 @@ import java.util.stream.Collectors;
  */
 public class AppRootLogic {
 
-    private static TopLogicFactory topLogicFactory;
-    private static List<Domain> domains;
+    private static TopLogicFactory topLogicFactory = null;
+    private static List<Domain> domains = new ArrayList<>();
 
     public AppRootLogic(TopLogicFactory topLogicFactory) {
         AppRootLogic.topLogicFactory = topLogicFactory;
