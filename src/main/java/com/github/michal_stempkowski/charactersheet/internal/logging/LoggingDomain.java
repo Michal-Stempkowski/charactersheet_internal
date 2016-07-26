@@ -1,8 +1,8 @@
 package com.github.michal_stempkowski.charactersheet.internal.logging;
 
-import com.github.michal_stempkowski.charactersheet.internal.app.AppRootLogic;
 import com.github.michal_stempkowski.charactersheet.internal.InternalDomainId;
 import com.github.michal_stempkowski.charactersheet.internal.Target;
+import com.github.michal_stempkowski.charactersheet.internal.app.AppRootLogic;
 import com.github.michal_stempkowski.charactersheet.internal.app.Domain;
 import com.github.michal_stempkowski.charactersheet.internal.utils.ErrorMonad;
 
